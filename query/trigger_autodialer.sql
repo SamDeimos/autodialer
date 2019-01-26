@@ -9,12 +9,17 @@
 #
 /*Calificador de llamadas Autodialer*/
 DROP TRIGGER IF EXISTS `autodialer`;
-CREATE DEFINER='root'@'%' TRIGGER `asteriskcdrdb`.`autodialer` AFTER INSERT ON `asteriskcdrdb`.`cdr`
+CREATE DEFINER='root'@'%' TRIGGER `asteriskcdrdb`.`autodialer` BEFORE INSERT ON `asteriskcdrdb`.`cdr`
   FOR EACH ROW BEGIN
-IF(NEW.clid = 'Autodialer' AND NEW.dst = '') THEN
+  IF (NEW.cnum = '0800' AND NEW.cnam = 'Autodialer') THEN
     UPDATE autodialer.calloutnumeros
-      SET duration = NEW.duration, respuesta = NEW.disposition
+      SET respuesta = 'Llamando'
+      WHERE fecha_call = NEW.calldate;
+   ELSEIF (NEW.src = '0800' AND NEW.dstchannel = '') THEN
+    UPDATE autodialer.calloutnumeros
+      SET respuesta = NEW.disposition, duration = NEW.duration
       WHERE fecha_call = NEW.calldate;
    END IF;
 END;
+
 
