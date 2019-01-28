@@ -75,7 +75,7 @@ if ($trunk == 'PPM'){
     $troncal = "Local/".$prefijo;
     $ctxtPPM = "@".$Contexto;
 }else{
-    $troncal = $trunk;
+    $troncal = $trunk."/";
     $ctxtPPM = "";
 }
 
@@ -159,7 +159,6 @@ while ($array = mysql_fetch_array($result)){
         $upd_query = mysql_query($upd_sql);
 
         /*******************************************/
-        
         $fp = fopen("/var/spool/asterisk/outgoing/myarchivo$id.call","a");
         fwrite($fp, 
         $Channel . PHP_EOL . 
@@ -172,6 +171,8 @@ while ($array = mysql_fetch_array($result)){
         $aapp . PHP_EOL .
         $app_data . PHP_EOL ); 
         fclose($fp);
+        /******************************************/
+
         $cont = $cont + 1;
         if ($call < $maxcall){
             $call = $call + 1;
@@ -196,7 +197,7 @@ while ($array = mysql_fetch_array($result)){
 /*******************************/
 
 /*********** VALIDACION DE CAMPAÑA TERMINADA ************/
-if($cont-1 >= $num_rows){
+if($cont >= $num_rows){
     conecta('autodialer');
     $sql="update calloutcampana set estado= 'terminada' where idcampana = '$idcamp'";
     $res = mysql_query($sql);
