@@ -43,8 +43,8 @@ $troncales = listar_trunk();
 									<label class="input-group-text">Troncal</label>
 									</div>
 									<select class="form-control form-control-sm" id="trunk" name="trunk">
-										<?php foreach($troncales as $fila){?>
 										<option value="PPM">(Plan Por Marcado)</option>
+										<?php foreach($troncales as $fila){?>
 										<option value="<?php echo strtoupper($fila['tech']) ."/" .$fila['channelid'] ?>">
 										<?php echo $fila['name'] ?>
 										</option>
