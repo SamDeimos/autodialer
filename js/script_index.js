@@ -1,5 +1,5 @@
 function hiddenAlert(){
-	$(".alert").fadeTo(2000, 1000).slideUp(1000, function(){ 
+	$(".alert").fadeTo(2000, 1000).slideUp(1500, function(){ 
 		$(".alert").slideUp(1500); 
 	});
 }
@@ -135,7 +135,6 @@ $( "#pausa" ).submit(function( event ) {
 			url: "src/ajax/pausa_camp.php",
 			data: parametros,
 			 beforeSend: function(objeto){
-				$("#resultados").html("Enviando...");
 				$('#pausaModal').modal('hide');
 				},
 			success: function(datos){
@@ -145,7 +144,7 @@ $( "#pausa" ).submit(function( event ) {
 			hiddenAlert();
 			}
 	});
-	//event.preventDefault();
+	event.preventDefault();
 });
 
 $( "#startcamp" ).submit(function(event){
@@ -155,7 +154,6 @@ $( "#startcamp" ).submit(function(event){
 		url: "src/ajax/start_camp.php",
 		data: parametros,
 		beforeSend: function(){
-			$("#resultados").innerHTML="<img src='src/img/loading.gif' title='cargando...' />";
 			$('#startCampModal').modal('hide');
 		},
 		success: function(datos){
@@ -165,5 +163,5 @@ $( "#startcamp" ).submit(function(event){
 			hiddenAlert();
 		}
 	});
-	//event.preventDefault();
+	event.preventDefault();
 });
