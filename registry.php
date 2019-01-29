@@ -10,7 +10,7 @@
 	$tables= "autodialer.calloutnumeros a
 	left join asteriskcdrdb.cdr b
 	on a.uniqueid = b.uniqueid";
-	$campos="a.campana, a.telefono, a.nombre, a.cedula, a.mora, a.monto, b.disposition, b.duration";
+	$campos="a.campana, a.telefono, a.nombre, a.cedula, a.mora, a.monto, a.respuesta, a.fecha_call, a.uniqueid, b.disposition, b.duration";
 	$sWhere="where campana = $camp";
 	$sWhere.="";
 		//Count the total number of row in your table*/
@@ -88,7 +88,14 @@
 											<td ><?php echo $row['cedula'];?></td>
 											<td ><?php echo $row['mora'];?></td>
 											<td ><?php echo $row['monto'];?></td>
-											<td ><?php echo $row['disposition'];?></td>
+											<td ><?php
+												if(is_null($row['disposition']) AND is_null($row['fecha_call'])){
+													echo "";
+												}elseif($row['respuesta'] = "Cola" AND is_null($row['uniqueid'])){
+													echo "NO ANSWER";
+												}elseif($row['respuesta'] = "Llamado"){
+													echo $row['disposition'];
+												};?></td>
 											<td class="text-center"><?php echo $row['duration'];?></td>
 										</tr>
 										<?php }?>

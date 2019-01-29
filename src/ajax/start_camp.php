@@ -135,7 +135,7 @@ while ($array = mysql_fetch_array($result)){
     $numero=$array['telefono'];
     $Channel= "Channel: " . $troncal. $numero .$ctxtPPM ;
     $num_src = $callid. $prefijo . $numero;		// Se utiliza para buscar en el src del CDR
-    $Callerid= "Callerid: Autodialer <".$callid.">";
+    $Callerid= "Callerid: Autodialer <".$numero.">";
     $aapp = "Application: Dial";
     $app_data = "Data: Local/".$exten."@".$Contexto; 
     $app_var1 = "Set: PassedInfo=15551234567";
