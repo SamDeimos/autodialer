@@ -15,7 +15,11 @@ $resultcampana = mysql_fetch_array($querycampana);
 $filename = $resultcampana['archivo'];
 
 
-$sql_query = "SELECT campana,telefono,nombre,cedula,mora,monto,respuesta,duration FROM calloutnumeros where campana = '$id'";
+$sql_query = "SELECT a.campana, a.telefono, a.nombre, a.cedula, a.mora, a.monto, case a.respuesta when 'Cola' then ifnull(b.disposition,'NO ANSWER') when 'Llamado' then b.disposition end as disposition, b.duration, b.calldate, b.recordingfile
+FROM autodialer.calloutnumeros a
+LEFT JOIN asteriskcdrdb.cdr b
+ON a.uniqueid = b.uniqueid
+WHERE campana = '$id'";
 
 $csv_terminated = "\n";
 $csv_separator = ",";
