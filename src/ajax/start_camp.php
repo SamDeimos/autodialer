@@ -80,7 +80,7 @@ if ($trunk == 'PPM'){
     $troncal = "Local/".$prefijo;
     $ctxtPPM = "@".$Contexto;
 }else{
-    $troncal = $trunk;
+    $troncal = $trunk ."/";
     $ctxtPPM = "";
 }
 
