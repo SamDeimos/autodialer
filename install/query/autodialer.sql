@@ -1,5 +1,5 @@
-﻿# Host: 192.168.0.194  (Version 5.5.52-MariaDB)
-# Date: 2019-01-29 14:07:32
+﻿# Host: 192.168.100.13  (Version 5.5.52-MariaDB)
+# Date: 2019-02-02 20:35:15
 # Generator: MySQL-Front 6.1  (Build 1.26)
 
 
@@ -26,6 +26,7 @@ CREATE TABLE `calloutcampana` (
   PRIMARY KEY (`idcampana`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
+
 #
 # Structure for table "calloutnumeros"
 #
@@ -43,6 +44,7 @@ CREATE TABLE `calloutnumeros` (
   `respuesta` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
   `duration` int(11) DEFAULT NULL,
   `fecha_call` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `recordingfile` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
   `uniqueid` varchar(32) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;

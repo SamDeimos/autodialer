@@ -10,7 +10,7 @@ $dbase='autodialer';
 $servidor='localhost';
 $usuario='root';
 $pass='bcga1303';
-//$id = $_SERVER['argv'][1];
+
 date_default_timezone_set("America/Guayaquil");
 $hora_actual = date("H:i:s");
 $link = mysql_connect($servidor,$usuario,$pass);
@@ -21,18 +21,31 @@ $sel_db = mysql_select_db($dbase);
 if(!$sel_db){
 	$agiwrapper->verbose("Imposible seleccionar DB");
 }
+//Variables de fecha
+$year = date("Y");
+$month = date("m");
+$day = date("d");
+$fecha = date("Ymd-his");
 
-$agiwrapper->exec('Playback',"hang-on-a-second");		//Saludo inicial
+//Variables de llamada
 $callerid = $agiwrapper->get_variable('CALLERID(num)');
-$src_num = $callerid['data'];							//Numero Entrante
+$src_num = $callerid['data'];
 $callerid = $agiwrapper->get_variable('CALLERID(name)');
-$name = $callerid['data'];								//Numero Entrante
+$name = $callerid['data'];
+$callerid = $agiwrapper->get_variable('CDR(dst)');
+$dst = $callerid['data'];
 $uniqueid = $agiwrapper->request['agi_uniqueid'];
-//Validar informacion
+$recordingfilename = "q-$dst-$src_num-$fecha-$uniqueid.wav";
+
+//Debug 
 $agiwrapper->verbose("uniqueid: $uniqueid");
 $agiwrapper->verbose("NAME: $name");
 $agiwrapper->verbose("Calleid: $src_num");
+$agiwrapper->verbose("DST: $dst");
 
-$query_verify = "UPDATE calloutnumeros SET uniqueid = '$uniqueid', respuesta = 'Llamado' WHERE telefono = $src_num AND respuesta = 'Cola' order by id desc limit 1";
+//Grabador de llamada
+$agiwrapper->exec("MixMonitor","/var/spool/asterisk/monitor/$year/$month/$day/$recordingfilename","b");
+
+$query_verify = "UPDATE calloutnumeros SET uniqueid = '$uniqueid', respuesta = 'Llamado', recordingfile = '$recordingfilename' WHERE telefono = $src_num AND respuesta = 'Cola' order by id desc limit 1";
 $result_verify = mysql_query($query_verify, $link);
-?>
+?>	

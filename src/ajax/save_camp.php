@@ -39,7 +39,7 @@ if (empty($_POST['name'])){
 	$query = mysql_query($sql);
 	$result = mysql_fetch_array($query);
 	$camp_id = $result['idcampana'];
-	$new_file_name = $camp_id ."-" .date("mdy").date("His")."-".$file_name;
+	$new_file_name = $camp_id ."-" .date("mdy")."-".date("His")."-".$file_name;
 
 	conecta('autodialer');
 	$sqlupda = "UPDATE calloutcampana SET archivo = '$new_file_name' where idcampana = $camp_id";

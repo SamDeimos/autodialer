@@ -2,27 +2,21 @@ include => call-file-test
 
 [call-file-test]
 exten => 4010,1,Answer
-exten => 4010,2,AGI(calificar.php) ;Calicar llamada
+exten => 4010,2,AGI(calificar.php)
 exten => 4010,3,wait(5)
 exten => 4010,4,Mysql(connect conexion localhost root bcga1303 autodialer)
-;exten => 4010,n,Mysql(query cdr ${conexion} INSERT INTO cdr(numero,fecha,hora) VALUES (${CALLERID(num)},${STRFTIME(${EPOCH},,%Y%m%d)},${STRFTIME(${EPOCH},,%H%M%S)}))
-exten => 4010,n,NoOP(fecha ${STRFTIME(${EPOCH},,%Y-%m-%d)})
-exten => 4010,n,NoOP(hora ${STRFTIME(${EPOCH},,%H:%M:%S)})
-;la siguiente seccion consulta en la BD los datos relacionados al numero al que se llama
-exten => 4010,n,Mysql(query consulta ${conexion} SELECT * FROM calloutnumeros WHERE telefono=${CALLERID(num)} order by id desc )
+exten => 4010,n,Mysql(query consulta ${conexion} SELECT * FROM calloutnumeros WHERE telefono=${CALLERID(num)} AND respuesta='Llamado' order by id desc limit 1)
 exten => 4010,n,Mysql(fetch asignacion ${consulta} id campana telefono nombre cedula mora monto)
 exten => 4010,n,NoOP(telefono = ${telefono})
 exten => 4010,n,NoOP(nombre = ${nombre})
 exten => 4010,n,NoOP(cedula = ${cedula})
 exten => 4010,n,NoOP(mora = ${mora})
 exten => 4010,n,NoOP(monto = ${monto})
-;exten = 4010,n,Playback(custom/ingenieria)
 exten => 4010,n,Playback(custom/deudor_01)
 exten => 4010,n,wait(2)
-exten => 4010,n,agi(/var/lib/asterisk/agi-bin/asterisk-googletts/googletts.agi,"Merli Celi",es)
-;exten => 4010,n,agi(/var/lib/asterisk/agi-bin/asterisk-googletts/googletts.agi,"${nombre}",es)
+exten => 4010,n,agi(/var/lib/asterisk/agi-bin/asterisk-googletts/googletts.agi,"${nombre}",es)
 exten => 4010,n,Playback(custom/deudor_03)
-exten => 4010,n,agi(/var/lib/asterisk/agi-bin/asterisk-googletts/googletts.agi,("200 dolares"),es)
+exten => 4010,n,agi(/var/lib/asterisk/agi-bin/asterisk-googletts/googletts.agi,("${monto}"),es)
 exten => 4010,n,Playback(custom/deudor_02)
 exten => 4010,n,agi(/var/lib/asterisk/agi-bin/asterisk-googletts/googletts.agi,("29 de enero del 2019"),es)
 exten => 4010,n,Playback(custom/deudor_04)
