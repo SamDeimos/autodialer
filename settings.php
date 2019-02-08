@@ -52,11 +52,7 @@ require_once ('conexion.php');
 							</div>
                         </div>
                         <div class="row">
-							<div class="form-group col-6">
-									<label>MaxCall</label>
-									<input type="text" name="maxcall" id="maxcall" class="form-control form-control-sm" value="<?php echo $resultsettings['MaxCall'] ?>" required>
-							</div>
-							<div class=" form-group col-6">
+							<div class=" form-group col-12">
 									<label>Priority</label>
 									<input type="text" name="priority" id="priority" class="form-control form-control-sm" value="<?php echo $resultsettings['Priority'] ?>" required>
 							</div>

@@ -80,8 +80,16 @@ $troncales = listar_trunk();
 								</div>
 							</div>
 							<div class="form-group col-6">
-								<label>Duración de llamada</label>
-								<input type="text" name="time" id="time" class="form-control form-control-sm" value="35" required>
+								<div class="row">
+									<div class="form-group col-6">
+										<label>Duración de llamada</label>
+										<input type="text" name="time" id="time" class="form-control form-control-sm" value="35" required>
+									</div>
+									<div class="form-group col-6">
+										<label>Llamadas simultaneas</label>
+										<input type="text" name="maxcall" id="maxcall" class="form-control form-control-sm" value="1" required>
+									</div>
+								</div>
 							</div>
 						</div>
 						<div class="row">

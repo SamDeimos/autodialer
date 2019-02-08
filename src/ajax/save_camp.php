@@ -12,6 +12,7 @@ if (empty($_POST['name'])){
     $camp_troncal = $_POST['camp_troncal'];
     $context = $_POST['context'];
     $time = $_POST['time'];
+    $maxcall = $_POST['maxcall'];
     $prefix = $_POST['prefix'];
 	$prefix_callerid = $_POST['prefix_callerid'];
 	$createdate = date("YmdHis");
@@ -26,12 +27,11 @@ if (empty($_POST['name'])){
 	$MaxRetries = $resultsettings['MaxRetries'];
 	$RetryTime = $resultsettings['RetryTime'];
 	$WaitTime = $resultsettings['WaitTime'];
-	$MaxCall = $resultsettings['MaxCall'];
 	$Priority = $resultsettings['Priority'];
 
 	/******************** CREACION DE CAMPAÑA ********************/
 	conecta('autodialer');
-	$sqlcamp = "INSERT INTO calloutcampana(nombre,tipo,context,fechacreacion,extension,prefijo,trunk,callid,espera,hinicio,hfin,estado) value('".$name_camp."','Autodialer','".$context."','".$createdate."','".$type_camp."','".$prefix."','".$trunk."','".$prefix_callerid."','".$time."','".$camp_h_ini."','".$camp_h_fin."','cargada')";
+	$sqlcamp = "INSERT INTO calloutcampana(nombre,tipo,context,fechacreacion,extension,prefijo,maxcall,trunk,callid,espera,hinicio,hfin,estado) value('".$name_camp."','Autodialer','".$context."','".$createdate."','".$type_camp."','".$prefix."','".$maxcall."','".$trunk."','".$prefix_callerid."','".$time."','".$camp_h_ini."','".$camp_h_fin."','cargada')";
 	$query = mysql_query($sqlcamp) or die(mysql_error());
 
 	conecta('autodialer');
@@ -77,11 +77,11 @@ if (empty($_POST['name'])){
 		            $numero=0;
 		            $nombre=1;
 		            $cedula=2;
-		            $mora=3;
-					$monto=4;
+		            $option1=3;
+					$option2=4;
 					$number = $prefix_callerid . $prefix . $data[$numero];
                     conecta('autodialer');
-                    $sql="INSERT INTO calloutnumeros(campana,telefono,nombre,cedula,mora,monto,callid,respuesta,duration) VALUE ('".$camp_id."','".$data[$numero]."','".$data[$nombre]."','".$data[$cedula]."','".$data[$mora]."','".$data[$monto]."','$number','','0')";
+                    $sql="INSERT INTO calloutnumeros(campana,telefono,nombre,cedula,option1,option2,callid,respuesta,duration) VALUE ('".$camp_id."','".$data[$numero]."','".$data[$nombre]."','".$data[$cedula]."','".$data[$option1]."','".$data[$option2]."','$number','','0')";
                     $query = mysql_query($sql) or die(mysql_error());
                 }	//Fin del While
             }

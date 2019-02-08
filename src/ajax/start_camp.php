@@ -59,6 +59,7 @@ if($reg[estado] == "terminada"){
 
 /********* DECLARACION DE VARIABLES **********/
 $inicio_campana = $reg['fechacreacion'];
+$maxcall = $reg['maxcall'];
 $hinicio = $reg['hinicio'];
 $hfin = $reg['hfin'];
 $exten=$reg['extension'];
@@ -69,7 +70,6 @@ $Contexto = $reg['context'];
 $Priority= "Priority: " . $Priority = $resultsettings['Priority'];  	//PRIORIDAD DENTRO DE LA EXTENSION
 $prefijo= $reg['prefijo'];			
 $trunk= $reg['trunk']; 				            //Troncal de Salida /a-central1
-$maxcall= $resultsettings['MaxCall'];			//Simultaneos
 $callid= $reg['callid'];				        // CallerID
 $account = "Account: Autodialer";
 $async = "Async: 0";
@@ -135,7 +135,7 @@ while ($array = mysql_fetch_array($result)){
     $numero=$array['telefono'];
     $Channel= "Channel: " . $troncal. $numero .$ctxtPPM ;
     $num_src = $callid. $prefijo . $numero;		// Se utiliza para buscar en el src del CDR
-    $Callerid= "Callerid: Autodialer <".$numero.">";
+    $Callerid= "Callerid: Autodialer <".$callid.">";
     $aapp = "Application: Dial";
     $app_data = "Data: Local/".$exten."@".$Contexto; 
     $app_var1 = "Set: PassedInfo=15551234567";

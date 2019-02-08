@@ -12,7 +12,7 @@
 	
 
 	// DELETE FROM  database
-	$sqlsettings = "UPDATE settings SET MaxRetries='$maxretries', RetryTime='$retrytime', WaitTime='$waittime', MaxCall='$maxcall', Priority='$priority' WHERE id = 1";
+	$sqlsettings = "UPDATE settings SET MaxRetries='$maxretries', RetryTime='$retrytime', WaitTime='$waittime', Priority='$priority' WHERE id = 1";
     conecta('autodialer');
 	$query = mysql_query($sqlsettings);
 	

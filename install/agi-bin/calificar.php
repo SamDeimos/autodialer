@@ -35,7 +35,8 @@ $name = $callerid['data'];
 $callerid = $agiwrapper->get_variable('CDR(dst)');
 $dst = $callerid['data'];
 $uniqueid = $agiwrapper->request['agi_uniqueid'];
-$recordingfilename = "q-$dst-$src_num-$fecha-$uniqueid.wav";
+$recordingfilename = "q-$dst-$src_num-$fecha-$uniqueid.gsm";
+$folder = "/var/spool/asterisk/monitor/$year/$month/$day";
 
 //Debug 
 $agiwrapper->verbose("uniqueid: $uniqueid");
@@ -43,8 +44,7 @@ $agiwrapper->verbose("NAME: $name");
 $agiwrapper->verbose("Calleid: $src_num");
 $agiwrapper->verbose("DST: $dst");
 
-//Grabador de llamada
-$agiwrapper->exec("MixMonitor","/var/spool/asterisk/monitor/$year/$month/$day/$recordingfilename","b");
+$agiwrapper->exec("MixMonitor","$folder/$recordingfilename","b");
 
 $query_verify = "UPDATE calloutnumeros SET uniqueid = '$uniqueid', respuesta = 'Llamado', recordingfile = '$recordingfilename' WHERE telefono = $src_num AND respuesta = 'Cola' order by id desc limit 1";
 $result_verify = mysql_query($query_verify, $link);

@@ -1,6 +1,6 @@
-﻿# Host: 192.168.100.13  (Version 5.5.52-MariaDB)
-# Date: 2019-02-02 20:35:15
-# Generator: MySQL-Front 6.1  (Build 1.26)
+﻿# Host: 192.168.0.194  (Version 5.5.52-MariaDB)
+# Date: 2019-02-08 13:01:17
+# Generator: MySQL-Front 6.0  (Build 3.1)
 
 
 #
@@ -17,6 +17,7 @@ CREATE TABLE `calloutcampana` (
   `fechacreacion` datetime DEFAULT NULL,
   `extension` int(11) DEFAULT NULL,
   `prefijo` varchar(100) DEFAULT NULL,
+  `maxcall` int(11) DEFAULT NULL,
   `trunk` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
   `callid` varchar(11) DEFAULT NULL,
   `espera` int(11) DEFAULT NULL,
@@ -25,7 +26,6 @@ CREATE TABLE `calloutcampana` (
   `estado` varchar(10) DEFAULT NULL,
   PRIMARY KEY (`idcampana`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
-
 
 #
 # Structure for table "calloutnumeros"
@@ -38,8 +38,8 @@ CREATE TABLE `calloutnumeros` (
   `telefono` varchar(11) DEFAULT NULL,
   `nombre` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
   `cedula` int(10) DEFAULT NULL,
-  `mora` int(3) DEFAULT NULL,
-  `monto` int(11) DEFAULT NULL,
+  `option1` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `option2` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
   `callid` varchar(12) NOT NULL,
   `respuesta` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
   `duration` int(11) DEFAULT NULL,
@@ -59,7 +59,6 @@ CREATE TABLE `settings` (
   `MaxRetries` varchar(255) DEFAULT NULL,
   `RetryTime` varchar(255) DEFAULT NULL,
   `WaitTime` varchar(255) DEFAULT NULL,
-  `MaxCall` varchar(255) DEFAULT NULL,
   `Priority` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`Id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
@@ -68,4 +67,4 @@ CREATE TABLE `settings` (
 # Data for table "settings"
 #
 
-INSERT INTO `settings` VALUES (1,'0','60','10','1','1');
+INSERT INTO `settings` VALUES (1,'0','60','10','1');

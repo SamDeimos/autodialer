@@ -10,7 +10,7 @@
 	$tables= "autodialer.calloutnumeros a
 	left join asteriskcdrdb.cdr b
 	on a.uniqueid = b.uniqueid";
-	$campos="a.campana, a.telefono, a.nombre, a.cedula, a.mora, a.monto, a.respuesta, a.fecha_call, a.uniqueid, b.disposition, b.duration";
+	$campos="a.campana, a.telefono, a.nombre, a.cedula, a.option1, a.option2, a.respuesta, a.fecha_call, a.uniqueid, b.disposition, b.duration";
 	$sWhere="where campana = $camp";
 	$sWhere.="";
 		//Count the total number of row in your table*/
@@ -55,7 +55,7 @@
 					</div>
 					<div class="col-sm-6">
 						<a href="src/ajax/export_csv.php?id=<?php echo $camp ?>" class="btn btn-success" target="_blank"><i class="material-icons">&#xE2C4;</i> <span>Exportar .CSV</span></a>
-						<a href="index.php" class="btn btn-success"><i class="material-icons">&#xE5C4;</i> <span>Ver Campañas</span></a>
+						<a href="javascript:history.go(-1)" class="btn btn-success"><i class="material-icons">&#xE5C4;</i> <span>Ver Campañas</span></a>
 					</div>
                 </div>
             </div>
@@ -69,8 +69,8 @@
 										<th>Teléfono </th>
 										<th>Nombre </th>
 										<th>Cédula </th>
-										<th>Mora</th>
-										<th>Monto</th>
+										<th>Opción 1</th>
+										<th>Opción 2</th>
 										<th>Respuesta</th>
 										<th>Duración</th>
 									</tr>
@@ -86,8 +86,8 @@
 											<td ><?php echo $row['telefono'];?></td>
 											<td ><?php echo $row['nombre'];?></td>
 											<td ><?php echo $row['cedula'];?></td>
-											<td ><?php echo $row['mora'];?></td>
-											<td ><?php echo $row['monto'];?></td>
+											<td ><?php echo $row['option1'];?></td>
+											<td ><?php echo $row['option2'];?></td>
 											<td ><?php
 												if(is_null($row['disposition']) AND is_null($row['fecha_call'])){
 													echo "";
