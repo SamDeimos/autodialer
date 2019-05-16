@@ -1,9 +1,9 @@
 #!/usr/bin/php -q
 <?php
-require_once('phpagi.php') ;
-$agiwrapper = new AGI() ;
-ob_implicit_flush(true) ;
-set_time_limit(0) ;
+require_once('phpagi.php');
+$agiwrapper = new AGI();
+ob_implicit_flush(true);
+set_time_limit(0);
 
 //Conexion BD poll
 $dbase='autodialer';
@@ -15,11 +15,11 @@ date_default_timezone_set("America/Guayaquil");
 $hora_actual = date("H:i:s");
 $link = mysql_connect($servidor,$usuario,$pass);
 if(!$link){
-	$agiwrapper->verbose("Imposible conectar a la DB");
+    $agiwrapper->verbose("Imposible conectar a la DB");
 }
 $sel_db = mysql_select_db($dbase);
 if(!$sel_db){
-	$agiwrapper->verbose("Imposible seleccionar DB");
+    $agiwrapper->verbose("Imposible seleccionar DB");
 }
 //Variables de fecha
 $year = date("Y");
@@ -34,18 +34,24 @@ $callerid = $agiwrapper->get_variable('CALLERID(name)');
 $name = $callerid['data'];
 $callerid = $agiwrapper->get_variable('CDR(dst)');
 $dst = $callerid['data'];
+$id_num_reg = $agiwrapper->get_variable('idnum');
+$id_num= $id_num_reg['data'];
 $uniqueid = $agiwrapper->request['agi_uniqueid'];
+
 $recordingfilename = "q-$dst-$src_num-$fecha-$uniqueid.gsm";
 $folder = "/var/spool/asterisk/monitor/$year/$month/$day";
 
-//Debug 
+//Debug
+$agiwrapper->verbose("Id de llamada: $id_num");
 $agiwrapper->verbose("uniqueid: $uniqueid");
 $agiwrapper->verbose("NAME: $name");
 $agiwrapper->verbose("Calleid: $src_num");
 $agiwrapper->verbose("DST: $dst");
+$agiwrapper->verbose("RecordFile: $recordingfilename");
+$agiwrapper->verbose("RuteRecordFile: $folder");
 
 $agiwrapper->exec("MixMonitor","$folder/$recordingfilename","b");
 
-$query_verify = "UPDATE calloutnumeros SET uniqueid = '$uniqueid', respuesta = 'Llamado', recordingfile = '$recordingfilename' WHERE telefono = $src_num AND respuesta = 'Cola' order by id desc limit 1";
+$query_verify = "UPDATE calloutnumeros SET uniqueid = '$uniqueid', respuesta = 'Llamado', recordingfile = '$folder/$recordingfilename' WHERE telefono = $src_num AND respuesta = 'Cola' order by id desc limit 1";
 $result_verify = mysql_query($query_verify, $link);
 ?>	

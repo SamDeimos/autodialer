@@ -1,6 +1,6 @@
 ﻿# Host: 192.168.0.194  (Version 5.5.52-MariaDB)
-# Date: 2019-02-08 13:01:17
-# Generator: MySQL-Front 6.0  (Build 3.1)
+# Date: 2019-05-16 10:33:48
+# Generator: MySQL-Front 6.1  (Build 1.26)
 
 
 #
@@ -42,7 +42,6 @@ CREATE TABLE `calloutnumeros` (
   `option2` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
   `callid` varchar(12) NOT NULL,
   `respuesta` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
-  `duration` int(11) DEFAULT NULL,
   `fecha_call` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   `recordingfile` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
   `uniqueid` varchar(32) DEFAULT NULL,

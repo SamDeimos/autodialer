@@ -65,7 +65,7 @@ if($action == 'ajax'){
 							<td><?php echo $file;?></td>
 							<td><?php echo $status;?></td>
 							<td width="150">
-								<a href="#" data-target="<?php echo $status=='terminada' ? '' : '#startCampModal'?>" class="start_camp <?php echo $status=='terminada' ? 'end_camp' : ''?>  <?php echo $status=='activa' ? 'd-none' : ''?> " data-toggle="modal" data-id="<?php echo $camp_id?>"><i class="material-icons disabled" data-toggle="tooltip" title="Iniciar llamadas" onclick="setTimeout('load(1)',2000);">&#xE0B0;</i></a>
+								<a href="#" data-target="<?php echo $status=='terminada' ? '' : '#startCampModal'?>" class="start_camp <?php echo $status=='terminada' || $status=='Fuera de horario' ? 'end_camp' : ''?>  <?php echo $status=='activa' ? 'd-none' : ''?> " data-toggle="modal" data-id="<?php echo $camp_id?>"><i class="material-icons disabled" data-toggle="tooltip" title="Iniciar llamadas" onclick="setTimeout('load(1)',2000);">&#xE0B0;</i></a>
 								<a href="#" data-target="#pausaModal" class="edit <?php echo $status=='pausada' || $status=='terminada' || $status=='cargada' ? 'd-none' : ''?>" data-toggle="modal" data-id="<?php echo $camp_id?>"><i class="material-icons" data-toggle="tooltip" title="Pausar llamada" >&#xE620;</i></a>
 								<a href="registry.php?camp=<?php echo $camp_id;?>&pagina=1" class="registry"><i class="material-icons" data-toggle="tooltip" title="Reporte">&#xE0BC;</i></a>
 								<a href="#" data-target="#deleteModal" class="delete" data-toggle="modal" data-tabla="calloutcampana" data-id="<?php echo $camp_id;?>"><i class="material-icons" data-toggle="tooltip" title="Eliminar">&#xE872;</i></a>

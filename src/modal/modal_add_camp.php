@@ -26,9 +26,9 @@ $troncales = listar_trunk();
 									<label class="input-group-text">Campaña</label>
 									</div>
 									<select class="form-control form-control-sm" id="type_camp" name="type_camp">
-										<option value="4010" selected="selected">Deudor</option>
-            							<option value="4011">Garante</option>
-            							<option value="4012">Conyuge</option>
+										<option value="4010" selected="selected">Cobranza</option>
+            							<option value="4011">Marketing</option>
+            							<option value="4012"></option>
             							<option value="1234">Prueba</option>
 									</select>
 								</div>
