@@ -21,6 +21,7 @@ $sel_db = mysql_select_db($dbase);
 if(!$sel_db){
     $agiwrapper->verbose("Imposible seleccionar DB");
 }
+
 //Variables de fecha
 $year = date("Y");
 $month = date("m");
@@ -38,20 +39,37 @@ $id_num_reg = $agiwrapper->get_variable('idnum');
 $id_num= $id_num_reg['data'];
 $uniqueid = $agiwrapper->request['agi_uniqueid'];
 
-$recordingfilename = "q-$dst-$src_num-$fecha-$uniqueid.gsm";
-$folder = "/var/spool/asterisk/monitor/$year/$month/$day";
-
 //Debug
 $agiwrapper->verbose("Id de llamada: $id_num");
 $agiwrapper->verbose("uniqueid: $uniqueid");
 $agiwrapper->verbose("NAME: $name");
 $agiwrapper->verbose("Calleid: $src_num");
 $agiwrapper->verbose("DST: $dst");
-$agiwrapper->verbose("RecordFile: $recordingfilename");
-$agiwrapper->verbose("RuteRecordFile: $folder");
 
-$agiwrapper->exec("MixMonitor","$folder/$recordingfilename","b");
+//Grabar llamada
+$sql_recording = 'SELECT Recording FROM settings';
+$query_recording = mysql_query($sql_recording, $link);
+$result_recording = mysql_fetch_array($query_recording);
+if($result_recording['Recording'] == 1){
+    $recordingfilename = "q-$dst-$src_num-$fecha-$uniqueid.gsm";
+    $folder = "/var/spool/asterisk/monitor/$year/$month/$day";
+    $recordingfile = $folder.'/'.$recordingfilename;
 
-$query_verify = "UPDATE calloutnumeros SET uniqueid = '$uniqueid', respuesta = 'Llamado', recordingfile = '$folder/$recordingfilename' WHERE telefono = $src_num AND respuesta = 'Cola' order by id desc limit 1";
+    //Debug
+    $agiwrapper->verbose("RecordFile: $recordingfilename");
+    $agiwrapper->verbose("RuteRecordFile: $folder");
+    $agiwrapper->verbose("Grabar llamadas: ACTIVADO");
+
+    //inicar grabación
+    $agiwrapper->exec("MixMonitor","$recordingfile","b");
+
+}else{
+    $recordingfile = '';
+    $agiwrapper->verbose("Grabar llamadas: DESACTIVADO");
+
+}
+
+//Insartar datos para calificar llamada
+$query_verify = "UPDATE calloutnumeros SET uniqueid = '$uniqueid', respuesta = 'Llamado', recordingfile = '$recordingfile' WHERE telefono = $src_num AND respuesta = 'Cola' order by id desc limit 1";
 $result_verify = mysql_query($query_verify, $link);
 ?>	

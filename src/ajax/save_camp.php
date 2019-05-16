@@ -81,7 +81,7 @@ if (empty($_POST['name'])){
 					$option2=4;
 					$number = $prefix_callerid . $prefix . $data[$numero];
                     conecta('autodialer');
-                    $sql="INSERT INTO calloutnumeros(campana,telefono,nombre,cedula,option1,option2,callid,respuesta,duration) VALUE ('".$camp_id."','".$data[$numero]."','".$data[$nombre]."','".$data[$cedula]."','".$data[$option1]."','".$data[$option2]."','$number','','0')";
+                    $sql="INSERT INTO calloutnumeros(campana,telefono,nombre,cedula,option1,option2,callid,respuesta) VALUE ('".$camp_id."','".$data[$numero]."','".$data[$nombre]."','".$data[$cedula]."','".$data[$option1]."','".$data[$option2]."','$number','')";
                     $query = mysql_query($sql) or die(mysql_error());
                 }	//Fin del While
             }

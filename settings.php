@@ -38,6 +38,7 @@ require_once ('conexion.php');
             <br>
 				<form name="save_settings" id="save_settings">
 						<div class="row">
+							<input type="hidden" value="1" name="id_setting" id="id_setting">
 							<div class="form-group col-4">
 									<label>MaxRetries</label>
 									<input type="text" name="maxretries" id="maxretries" class="form-control form-control-sm" value="<?php echo $resultsettings['MaxRetries'] ?>" required>
@@ -52,9 +53,24 @@ require_once ('conexion.php');
 							</div>
                         </div>
                         <div class="row">
-							<div class=" form-group col-12">
+							<div class="form-group col-6">
 									<label>Priority</label>
 									<input type="text" name="priority" id="priority" class="form-control form-control-sm" value="<?php echo $resultsettings['Priority'] ?>" required>
+							</div>
+							<div class="form-group col-6">
+								<label>Grabar llamadas</label><br>
+								<div class="form-check form-check-inline">
+									<input class="form-check-input" type="radio" value="1" name="grabar" id="grabar" <?php echo ($resultsettings['Recording'] == 1) ? 'checked' : '' ?>>
+									<label class="form-check-label" for="defaultCheck1">
+										Habilitar
+									</label>
+								</div>
+								<div class="form-check form-check-inline">
+									<input class="form-check-input" type="radio" value="0" name="grabar" id="grabar" <?php echo ($resultsettings['Recording'] == 0) ? 'checked' : '' ?>>
+									<label class="form-check-label" for="defaultCheck1">
+										Deshabilitar
+									</label>
+								</div>
 							</div>
                         </div>
                     <div class="modal-footer">
