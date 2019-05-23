@@ -19,7 +19,22 @@ Pasos para una correcta instalación de autodialer:
 
     **NOTA:** *para que se apliquen los cambios es necesario realizar un* **reload** *o un* **amportal restart** *de asterisk.*
 3. Es necesario dar permismo **chown 0777** a la carpeta *files_csv* para permitir el guardado de archivos .csv.
-4. para comprobar que la instalación se ha realizado correctamente debe de acceder a *MI_IP/autodialer* y debe poder ver el panel de administración.
+4. Debe de configurar el usuario y contraseña a la base de datos en lso siguientes archivos
+    - *autodialer/conexion.php*
+        // DB credentials.
+	    define('DB_HOST','localhost');
+	    define('DB_USER','root');
+	    define('DB_PASS','bcga1303');
+	    define('DB_NAME','autodialer');
+    - *extension_custom.conf*
+        exten => 4010,3,Mysql(connect conexion localhost root bcga1303 autodialer)
+    - */var/lib/asterisk/agi-bin/calificar.php*
+        //Conexion BD poll
+        $dbase='autodialer';
+        $servidor='localhost';
+        $usuario='root';
+        $pass='bcga1303';
+5. para comprobar que la instalación se ha realizado correctamente debe de acceder a *MI_IP/autodialer* y debe poder ver el panel de administración.
 
 ---
 

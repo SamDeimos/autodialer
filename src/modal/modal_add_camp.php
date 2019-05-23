@@ -28,7 +28,7 @@ $troncales = listar_trunk();
 									<select class="form-control form-control-sm" id="type_camp" name="type_camp">
 										<option value="4010" selected="selected">Cobranza</option>
             							<option value="4011">Marketing</option>
-            							<option value="4012"></option>
+            							<option value="4012">Actualización</option>
             							<option value="1234">Prueba</option>
 									</select>
 								</div>
@@ -81,33 +81,20 @@ $troncales = listar_trunk();
 							</div>
 							<div class="form-group col-6">
 								<div class="row">
-									<div class="form-group col-6">
+									<div class="form-group col-12">
 										<label>Duración de llamada</label>
 										<input type="text" name="time" id="time" class="form-control form-control-sm" value="35" required>
-									</div>
-									<div class="form-group col-6">
-										<label>Llamadas simultaneas</label>
-										<input type="text" name="maxcall" id="maxcall" class="form-control form-control-sm" value="1" required>
 									</div>
 								</div>
 							</div>
 						</div>
 						<div class="row">
-							<div class="form-group col-6">
-								<div class="row">
-									<div class="form-group col-6">
-										<label>Prefijo. Por defecto: vacío</label>
-										<input type="text" name="prefix" id="prefix" class="form-control form-control-sm">
-									</div>
-									<div class="form-group col-6">
-										<label>Prefijo de CallerID</label>
-										<input type="text" name="prefix_callerid" id="prefix_callerid" class="form-control form-control-sm" value="0800" required>
-									</div>
+							<div class="form-group col-12">
+								<h5>Cargar .CSV</h5>
+								<div class="custom-file">
+									<input type="file" name="csvcustomFile" id="csvcustomFile" class="custom-file-input" required>
+									<label class="custom-file-label" for="csvcustomFile">Seleccionar Archivo</label>
 								</div>
-							</div>
-							<div class="form-group col-6">
-								<label>Archivo de llamada</label>
-								<input type="file" name="csvcustomFile" id="csvcustomFile" class="" required>
 							</div>
 						</div>		
 					</div>

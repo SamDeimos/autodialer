@@ -12,9 +12,7 @@ if (empty($_POST['name'])){
     $camp_troncal = $_POST['camp_troncal'];
     $context = $_POST['context'];
     $time = $_POST['time'];
-    $maxcall = $_POST['maxcall'];
-    $prefix = $_POST['prefix'];
-	$prefix_callerid = $_POST['prefix_callerid'];
+
 	$createdate = date("YmdHis");
 	//File .CSV
     $file_type = $_FILES['csvcustomFile']['type'];
@@ -28,10 +26,13 @@ if (empty($_POST['name'])){
 	$RetryTime = $resultsettings['RetryTime'];
 	$WaitTime = $resultsettings['WaitTime'];
 	$Priority = $resultsettings['Priority'];
+	$MaxCall = $resultsettings['MaxCall'];
+	$Prefix = $resultsettings['Prefix'];
+	$Prefix_Callerid = $resultsettings['Prefix_Callerid'];
 
 	/******************** CREACION DE CAMPAÑA ********************/
 	conecta('autodialer');
-	$sqlcamp = "INSERT INTO calloutcampana(nombre,tipo,context,fechacreacion,extension,prefijo,maxcall,trunk,callid,espera,hinicio,hfin,estado) value('".$name_camp."','Autodialer','".$context."','".$createdate."','".$type_camp."','".$prefix."','".$maxcall."','".$trunk."','".$prefix_callerid."','".$time."','".$camp_h_ini."','".$camp_h_fin."','cargada')";
+	$sqlcamp = "INSERT INTO calloutcampana(nombre,tipo,context,fechacreacion,extension,prefijo,maxcall,trunk,callid,espera,hinicio,hfin,estado) value('".$name_camp."','Autodialer','".$context."','".$createdate."','".$type_camp."','".$Prefix."','".$MaxCall."','".$trunk."','".$Prefix_Callerid."','".$time."','".$camp_h_ini."','".$camp_h_fin."','cargada')";
 	$query = mysql_query($sqlcamp) or die(mysql_error());
 
 	conecta('autodialer');
@@ -79,7 +80,7 @@ if (empty($_POST['name'])){
 		            $cedula=2;
 		            $option1=3;
 					$option2=4;
-					$number = $prefix_callerid . $prefix . $data[$numero];
+					$number = $prefix_callerid . $Prefix . $data[$numero];
                     conecta('autodialer');
                     $sql="INSERT INTO calloutnumeros(campana,telefono,nombre,cedula,option1,option2,callid,respuesta) VALUE ('".$camp_id."','".$data[$numero]."','".$data[$nombre]."','".$data[$cedula]."','".$data[$option1]."','".$data[$option2]."','$number','')";
                     $query = mysql_query($sql) or die(mysql_error());

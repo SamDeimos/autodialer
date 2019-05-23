@@ -1,5 +1,5 @@
 <?php
-require_once ("../../conexion.php");//Contiene funcion que conecta a la base de datos
+require_once ("../../conexion.php");
 
 $idcamp = $_POST['start_id'];
 //$idcamp = 10;
@@ -24,19 +24,6 @@ $sqlsettings = "SELECT * FROM settings";
 $querysettings = mysql_query($sqlsettings);
 $resultsettings = mysql_fetch_array($querysettings);
 $Priority = $resultsettings['Priority'];
-
-/******* VISTA DETALLES DE CAMPAÑA *******/
-// echo "<h1>DETALLES DE CAMPAÑA</h1>";
-// echo "<h2>Campaña # " .$idcamp ."</h2>";
-// echo "Nombre: " .$reg['nombre'] ."<br>";
-// echo "Estado: " .$reg['estado'] ."<br>";
-// echo "Fecha creación: " .$reg['fechacreacion'] ."<br>";
-// echo "Fecha inicio: " .$reg['hinicio'] ."<br>";
-// echo "Fecha fin: " .$reg['hfin'] ."<br>";
-// echo "<hr>";
-
-/*********************/
-
 //Validación de campaña Activa
 if($reg[estado] == "terminada"){
     ?>
@@ -63,17 +50,16 @@ $maxcall = $reg['maxcall'];
 $hinicio = $reg['hinicio'];
 $hfin = $reg['hfin'];
 $exten=$reg['extension'];
-$MaxRetries= "MaxRetries: " . $resultsettings['MaxRetries'];  	        //NUMERO DE REINTENTOS- campo retries
-$RetryTime= "RetryTime: " . $resultsettings['RetryTime']; 		        //SEGUNDO ENTRE INTENTOS
-$WaitTime= "WaitTime: " . $resultsettings['WaitTime']; 			        //SEGUNDOS ANTES DE COLGAR LA LLAMADA
+$MaxRetries= "MaxRetries: " . $resultsettings['MaxRetries'];
+$RetryTime= "RetryTime: " . $resultsettings['RetryTime'];
+$WaitTime= "WaitTime: " . $resultsettings['WaitTime'];
 $Contexto = $reg['context'];
-$Priority= "Priority: " . $Priority = $resultsettings['Priority'];  	//PRIORIDAD DENTRO DE LA EXTENSION
-$prefijo= $reg['prefijo'];			
-$trunk= $reg['trunk']; 				            //Troncal de Salida /a-central1
-$callid= $reg['callid'];				        // CallerID
+$Priority = "Priority: " .$resultsettings['Priority'];
+$prefijo = $reg['prefijo'];
+$trunk = $reg['trunk'];
+$callid= $reg['callid'];
 $account = "Account: Autodialer";
-$async = "Async: 0";
-$time= $reg['espera'];		//Tiempo entre llamadas									// Analoga o VoIP- campo troncal 1,2									// Analoga o VoIP- campo troncal 1,2
+$time= $reg['espera'];
 
 //***************** VALIDACION DE TRONCAL DE SALIDA **************** */
 if ($trunk == 'PPM'){
@@ -85,39 +71,15 @@ if ($trunk == 'PPM'){
 }
 
 /*********************************************/
-
-/********** VISTA DEPARAMETROS PARA LLAMADA ************/
-// echo "<h1>PARAMETROS DE LLAMADA</h1>";
-// echo "<h2>Parametros para Realizar llamadas</h2>";
-// echo "Extencion: " .$exten ."<br>";
-// echo $MaxRetries ."<br>";
-// echo $RetryTime ."<br>";
-// echo $WaitTime ."<br>";
-// echo "Contexto: " .$Contexto ."<br>";
-// echo $Priority ."<br>";
-// echo "Prefijo: " .$prefijo ."<br>";
-// echo "Llamadas Simultaneas: " .$maxcall ."<br>";
-// echo "Identificador de Llamada: " .$callid ."<br>";
-// echo $account ."<br>";
-// echo $async ."<br>";
-// echo "Tiempo de espera entre llamada: " .$time ."<br>";
-// echo "Trunk: " .$trunk ."<br>";
-// echo "Troncal: " .$troncal ."<br>";
-// echo "Plantilla de llamadas: " .$troncal ."(#)".$ctxtPPM ."<br>";
-// echo "<hr>";
-
-/*******************************************************/
-
-/****** REALIZAR LLAMDAS *******/
-//echo "<h1>Consulta a la base</h1>";
+/****** Lamadas a realizar *******/
 conecta('autodialer');
-$query = "SELECT * FROM calloutnumeros WHERE campana = $idcamp AND respuesta = ''";
-$result = mysql_query($query);
-$num_rows = mysql_num_rows($result);
-echo "<script>console.log( 'Resultado de query: " . $num_rows . "' );</script>";
+$query_llamar = "SELECT * FROM calloutnumeros WHERE campana = $idcamp AND respuesta = ''";
+$result_llamar = mysql_query($query_llamar) or die(msql_error());
+$num_rows_llamar = mysql_num_rows($result_llamar);
+echo "<script>console.log( 'Llamadas a realizar de la campaña #" . $idcamp . ": " . $num_rows_llamar . "' );</script>";
 $cont = 0;
 $call = 1;
-while ($array = mysql_fetch_array($result)){
+while ($array = mysql_fetch_array($result_llamar)){
 
     /*********** VALIDAR CAMPAÑA ACTIVA ***********/
     conecta('autodialer');
@@ -125,58 +87,45 @@ while ($array = mysql_fetch_array($result)){
     $verify_status = mysql_query($sql_status);
     $reg_status= mysql_fetch_array($verify_status);
     if($reg_status['estado'] != 'activa'){
-        echo "<script>console.log( 'Terminada en llamada: " . $cont . "' );</script>";
+        echo "<script>console.log( 'Se realizaron: " . $cont . " llamadas.' );</script>";
         break;
     }
-
     /*******************************************/
 
-    $id=$array['id'];
-    $numero=$array['telefono'];
-    $Channel= "Channel: " . $troncal. $numero .$ctxtPPM ;
-    $num_src = $callid. $prefijo . $numero;		// Se utiliza para buscar en el src del CDR
-    $Callerid= "Callerid: Autodialer <".$callid.">";
-    $aapp = "Application: Dial";
-    $app_data = "Data: Local/".$exten."@".$Contexto; 
-    $app_var1 = "Set: PassedInfo=15551234567";
+    $id = $array['id'];
+    $numero = $array['telefono'];
+    $Channel = "Channel: " . $troncal. $numero .$ctxtPPM ;
+    $num_src = $callid. $prefijo . $numero;
+    $Callerid = "Callerid: Autodialer <".$callid.">";
+    $app = "Application: Dial";
+    $app_data = "Data: Local/".$exten."@".$Contexto;
     $hora = date("H:i");
     if($hora>$hinicio and $hora<$hfin){
-        /***************** DEBUG ******************/
-        // echo "<hr>";
-        // echo "Llamada #: " .$cont ."<br>";
-        // echo "Id de llamada: " .$id ."<br>";
-        // echo $Channel ."<br>";
-        // echo $Callerid ."<br>";
-        // echo $MaxRetries ."<br>";
-        // echo $RetryTime ."<br>";
-        // echo $WaitTime ."<br>";
-        // echo $account ."<br>";
-        // echo $app_var1 ."<br>";
-        // echo $aapp ."<br>";
-        // echo $app_data ."<br>";
-        // echo "Tiempo espera: " .$time ."<br>";
-        // echo "Llamada simultanea #: " .$call ."<br>";
-        // echo "<hr>";
-
         /*******************************************/
         conecta('autodialer');
         $upd_sql = "UPDATE calloutnumeros set respuesta = 'Cola' where id = '$id'";
         $upd_query = mysql_query($upd_sql);
-
         /*******************************************/
         
-        $fp = fopen("/var/spool/asterisk/outgoing/myarchivo$id.call","a");
-        fwrite($fp, 
-        $Channel . PHP_EOL . 
-        $Callerid . PHP_EOL . 
-        $MaxRetries . PHP_EOL . 
-        $RetryTime . PHP_EOL . 
-        $WaitTime . PHP_EOL . 
-        $account . PHP_EOL .
-        $app_var1 . PHP_EOL . 
-        $aapp . PHP_EOL .
-        $app_data . PHP_EOL ); 
-        fclose($fp);
+        $filedest = "/var/spool/asterisk/outgoing/llamada-".$id.".call";
+
+        fopen($filedest, "w");
+            $content = $Channel ."\n";
+            $content .= $Callerid ."\n";
+            $content .= $MaxRetries ."\n";
+            $content .= $WaitTime ."\n";
+            $content .= $account ."\n";
+            $content .= $Priority ."\n";
+            $content .= $RetryTime ."\n";
+            $content .= $app ."\n";
+            $content .= $app_data ."\n";
+            //$content .= "Context: autodialerdialer\n";
+            //$content .= "Extension: s\n";
+            //$content .= "Set: idcall=".$id."\n";
+            //$content .= "Set: exten=".$exten."\n";
+            //$content .= "Set: context=".$Contexto."\n";
+        file_put_contents($filedest, $content, FILE_TEXT | LOCK_EX);
+
         $cont = $cont + 1;
         if ($call < $maxcall){
             $call = $call + 1;
@@ -204,22 +153,20 @@ while ($array = mysql_fetch_array($result)){
         }
     }
 }
-
 /*******************************/
 
 /*********** VALIDACION DE CAMPAÑA TERMINADA ************/
-if($cont >= $num_rows){
+if($cont >= $num_rows_llamar){
     conecta('autodialer');
     $sql="update calloutcampana set estado= 'terminada' where idcampana = '$idcamp'";
     $res = mysql_query($sql);
     $messages[] = "Campaña completada correctamente, <strong>" .$cont ."</strong> números llamados de <strong>" .$num_rows ."</strong>";
-}elseif($cont < $num_rows){
+}elseif($cont < $num_rows_llamar){
     conecta('autodialer');
     $sql="update calloutcampana set estado= 'pausada' where idcampana = '$idcamp'";
     $res = mysql_query($sql);
     $errors[] = "Campaña incompleta, <strong>" .$cont ."</strong> números llamados de <strong>" .$num_rows ."</strong>";
 }
-
 /********************************************************/
 
 /************* RESUMEN DE LLAMADAS *************/

@@ -6,6 +6,7 @@ function hiddenAlert(){
 
 $( "#save_settings" ).submit(function( event ) {
 	var parametros = $(this).serialize();
+	console.log(parametros);
 	$.ajax({
 			type: "POST",
 			url: "src/ajax/save_settings.php",
@@ -14,8 +15,9 @@ $( "#save_settings" ).submit(function( event ) {
 				$("#resultados").html("Enviando...");
 				},
 			success: function(datos){
-			$("#resultados").html(datos);
-			hiddenAlert();
+				console.log(datos);
+				$("#resultados").html(datos);
+				hiddenAlert();
 			}
 	});
 	event.preventDefault();

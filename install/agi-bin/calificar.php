@@ -54,19 +54,13 @@ if($result_recording['Recording'] == 1){
     $recordingfilename = "q-$dst-$src_num-$fecha-$uniqueid.gsm";
     $folder = "/var/spool/asterisk/monitor/$year/$month/$day";
     $recordingfile = $folder.'/'.$recordingfilename;
-
-    //Debug
-    $agiwrapper->verbose("RecordFile: $recordingfilename");
-    $agiwrapper->verbose("RuteRecordFile: $folder");
-    $agiwrapper->verbose("Grabar llamadas: ACTIVADO");
-
+    
     //inicar grabación
     $agiwrapper->exec("MixMonitor","$recordingfile","b");
 
 }else{
     $recordingfile = '';
     $agiwrapper->verbose("Grabar llamadas: DESACTIVADO");
-
 }
 
 //Insartar datos para calificar llamada

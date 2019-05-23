@@ -1,5 +1,5 @@
-﻿# Host: 192.168.0.194  (Version 5.5.52-MariaDB)
-# Date: 2019-05-16 10:33:48
+﻿# Host: 192.168.0.229  (Version 5.5.56-MariaDB)
+# Date: 2019-05-23 16:53:50
 # Generator: MySQL-Front 6.1  (Build 1.26)
 
 
@@ -55,10 +55,14 @@ CREATE TABLE `calloutnumeros` (
 DROP TABLE IF EXISTS `settings`;
 CREATE TABLE `settings` (
   `Id` int(11) NOT NULL AUTO_INCREMENT,
-  `MaxRetries` varchar(255) DEFAULT NULL,
-  `RetryTime` varchar(255) DEFAULT NULL,
-  `WaitTime` varchar(255) DEFAULT NULL,
-  `Priority` varchar(255) DEFAULT NULL,
+  `MaxRetries` varchar(10) DEFAULT NULL,
+  `RetryTime` varchar(10) DEFAULT NULL,
+  `WaitTime` varchar(10) DEFAULT NULL,
+  `Priority` varchar(10) DEFAULT NULL,
+  `MaxCall` varchar(10) DEFAULT NULL,
+  `Recording` varchar(10) DEFAULT NULL,
+  `Prefix` varchar(10) DEFAULT NULL,
+  `Prefix_Callerid` varchar(10) DEFAULT NULL,
   PRIMARY KEY (`Id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
@@ -66,4 +70,4 @@ CREATE TABLE `settings` (
 # Data for table "settings"
 #
 
-INSERT INTO `settings` VALUES (1,'0','60','10','1');
+INSERT INTO `settings` VALUES (1,'0','60','10','1','1','0','','0800');
