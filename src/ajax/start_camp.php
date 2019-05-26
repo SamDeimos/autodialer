@@ -54,7 +54,6 @@ $MaxRetries= "MaxRetries: " . $resultsettings['MaxRetries'];
 $RetryTime= "RetryTime: " . $resultsettings['RetryTime'];
 $WaitTime= "WaitTime: " . $resultsettings['WaitTime'];
 $Contexto = $reg['context'];
-$Priority = "Priority: " .$resultsettings['Priority'];
 $prefijo = $reg['prefijo'];
 $trunk = $reg['trunk'];
 $callid= $reg['callid'];
@@ -93,12 +92,10 @@ while ($array = mysql_fetch_array($result_llamar)){
     /*******************************************/
 
     $id = $array['id'];
-    $numero = $array['telefono'];
-    $Channel = "Channel: " . $troncal. $numero .$ctxtPPM ;
-    $num_src = $callid. $prefijo . $numero;
+    $Channel = "Channel: " . $troncal . $array['telefono'] . $ctxtPPM ;
     $Callerid = "Callerid: Autodialer <".$callid.">";
     $app = "Application: Dial";
-    $app_data = "Data: Local/".$exten."@".$Contexto;
+    $app_data = "Data: " . $troncal . $exten . "@" . $Contexto;
     $hora = date("H:i");
     if($hora>$hinicio and $hora<$hfin){
         /*******************************************/
@@ -115,15 +112,11 @@ while ($array = mysql_fetch_array($result_llamar)){
             $content .= $MaxRetries ."\n";
             $content .= $WaitTime ."\n";
             $content .= $account ."\n";
-            $content .= $Priority ."\n";
             $content .= $RetryTime ."\n";
             $content .= $app ."\n";
             $content .= $app_data ."\n";
-            //$content .= "Context: autodialerdialer\n";
-            //$content .= "Extension: s\n";
-            //$content .= "Set: idcall=".$id."\n";
-            //$content .= "Set: exten=".$exten."\n";
-            //$content .= "Set: context=".$Contexto."\n";
+            $content .= "Set: CALLERID(num)=".$id."\n";
+            //$content .= "Archive: yes \n";
         file_put_contents($filedest, $content, FILE_TEXT | LOCK_EX);
 
         $cont = $cont + 1;

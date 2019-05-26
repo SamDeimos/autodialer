@@ -1,10 +1,10 @@
-include => call-file-test
+﻿include => call-file-test
 
 [call-file-test]
 exten => 4010,1,Answer
 exten => 4010,2,AGI(calificar.php)
 exten => 4010,3,Mysql(connect conexion localhost root bcga1303 autodialer)
-exten => 4010,n,Mysql(query consulta ${conexion} SELECT nombre, option1, option2 FROM calloutnumeros WHERE uniqueid=${CDR(uniqueid)})
+exten => 4010,4,Mysql(query consulta ${conexion} SELECT nombre, option1, option2 FROM calloutnumeros WHERE uniqueid=${CDR(uniqueid)})
 exten => 4010,n,Mysql(fetch asignacion ${consulta} nombre option1 option2)
 exten => 4010,n,Mysql(clear ${consulta})
 exten => 4010,n,Mysql(disconnect ${conexion})

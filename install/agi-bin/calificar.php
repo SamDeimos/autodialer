@@ -29,29 +29,23 @@ $day = date("d");
 $fecha = date("Ymd-his");
 
 //Variables de llamada
-$callerid = $agiwrapper->get_variable('CALLERID(num)');
-$src_num = $callerid['data'];
-$callerid = $agiwrapper->get_variable('CALLERID(name)');
-$name = $callerid['data'];
-$callerid = $agiwrapper->get_variable('CDR(dst)');
-$dst = $callerid['data'];
-$id_num_reg = $agiwrapper->get_variable('idnum');
-$id_num= $id_num_reg['data'];
+$callerid = $agiwrapper->request['agi_callerid'];
+$name = $agiwrapper->request['agi_calleridname'];
+$exten = $agiwrapper->request['agi_extension'];
 $uniqueid = $agiwrapper->request['agi_uniqueid'];
 
 //Debug
-$agiwrapper->verbose("Id de llamada: $id_num");
 $agiwrapper->verbose("uniqueid: $uniqueid");
-$agiwrapper->verbose("NAME: $name");
-$agiwrapper->verbose("Calleid: $src_num");
-$agiwrapper->verbose("DST: $dst");
+$agiwrapper->verbose("Account: $name");
+$agiwrapper->verbose("Calleid: $callerid");
+$agiwrapper->verbose("Exten: $exten");
 
 //Grabar llamada
 $sql_recording = 'SELECT Recording FROM settings';
 $query_recording = mysql_query($sql_recording, $link);
 $result_recording = mysql_fetch_array($query_recording);
 if($result_recording['Recording'] == 1){
-    $recordingfilename = "q-$dst-$src_num-$fecha-$uniqueid.gsm";
+    $recordingfilename = "q-$dst-$callerid-$fecha-$uniqueid.gsm";
     $folder = "/var/spool/asterisk/monitor/$year/$month/$day";
     $recordingfile = $folder.'/'.$recordingfilename;
     
@@ -64,6 +58,6 @@ if($result_recording['Recording'] == 1){
 }
 
 //Insartar datos para calificar llamada
-$query_verify = "UPDATE calloutnumeros SET uniqueid = '$uniqueid', respuesta = 'Llamado', recordingfile = '$recordingfile' WHERE telefono = $src_num AND respuesta = 'Cola' order by id desc limit 1";
+$query_verify = "UPDATE calloutnumeros SET uniqueid = '$uniqueid', respuesta = 'Llamado', recordingfile = '$recordingfile' WHERE id=$callerid order by id desc limit 1";
 $result_verify = mysql_query($query_verify, $link);
 ?>	

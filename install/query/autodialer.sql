@@ -1,5 +1,5 @@
-﻿# Host: 192.168.0.229  (Version 5.5.56-MariaDB)
-# Date: 2019-05-23 16:53:50
+﻿# Host: 192.168.100.25  (Version 5.5.56-MariaDB)
+# Date: 2019-05-25 21:45:52
 # Generator: MySQL-Front 6.1  (Build 1.26)
 
 
@@ -58,7 +58,6 @@ CREATE TABLE `settings` (
   `MaxRetries` varchar(10) DEFAULT NULL,
   `RetryTime` varchar(10) DEFAULT NULL,
   `WaitTime` varchar(10) DEFAULT NULL,
-  `Priority` varchar(10) DEFAULT NULL,
   `MaxCall` varchar(10) DEFAULT NULL,
   `Recording` varchar(10) DEFAULT NULL,
   `Prefix` varchar(10) DEFAULT NULL,
@@ -70,4 +69,4 @@ CREATE TABLE `settings` (
 # Data for table "settings"
 #
 
-INSERT INTO `settings` VALUES (1,'0','60','10','1','1','0','','0800');
+INSERT INTO `settings` VALUES (1,'1','60','30','1','0','','1911');

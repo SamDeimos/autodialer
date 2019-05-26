@@ -54,10 +54,6 @@ require_once ('conexion.php');
                         </div>
                         <div class="row">
 							<div class="form-group col-2">
-								<label>Priority</label>
-								<input type="text" name="priority" id="priority" class="form-control form-control-sm" value="<?php echo $resultsettings['Priority'] ?>" required>
-							</div>
-							<div class="form-group col-2">
 									<label>Llamadas simultaneas</label>
 									<input type="text" name="maxcall" id="maxcall" class="form-control form-control-sm" value="<?php echo $resultsettings['MaxCall'] ?>" required>
 							</div>
@@ -69,7 +65,7 @@ require_once ('conexion.php');
 								<label>Prefijo de CallerID</label>
 								<input type="text" name="prefix_callerid" id="prefix_callerid" class="form-control form-control-sm" value="<?php echo $resultsettings['Prefix_Callerid'] ?>" required>
 							</div>
-							<div class="form-group col-2">
+							<div class="form-group col-4">
 								<label>Grabar llamadas</label><br>
 								<div class="form-check form-check-inline">
 									<input class="form-check-input" type="radio" value="1" name="grabar" id="grabar" <?php echo ($resultsettings['Recording'] == 1) ? 'checked' : '' ?>>

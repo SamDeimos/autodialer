@@ -55,7 +55,7 @@
 					</div>
 					<div class="col-sm-6">
 						<a href="src/ajax/export_csv.php?id=<?php echo $camp ?>" class="btn btn-success" target="_blank"><i class="material-icons">&#xE2C4;</i> <span>Exportar .CSV</span></a>
-						<a href="javascript:history.go(-1)" class="btn btn-success"><i class="material-icons">&#xE5C4;</i> <span>Ver Campañas</span></a>
+						<a href="index.php" class="btn btn-success"><i class="material-icons">&#xE5C4;</i> <span>Ver Campañas</span></a>
 					</div>
                 </div>
             </div>
