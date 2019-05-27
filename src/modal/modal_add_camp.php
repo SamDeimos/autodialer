@@ -114,13 +114,13 @@ $troncales = listar_trunk();
 								<h5>Cargar .CSV</h5>
 								<div class="custom-file">
 									<input type="file" name="csvcustomFile" id="csvcustomFile" class="custom-file-input" required>
-									<label class="custom-file-label" for="csvcustomFile">Seleccionar Archivo</label>
+									<label class="custom-file-label" for="csvcustomFile" data-browse="Buscar archivo">Seleccionar Archivo</label>
 								</div>
 							</div>
 						</div>		
 					</div>
 					<div class="modal-footer">
-						<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">
+						<input type="button" class="btn btn-secondary" data-dismiss="modal" value="Cancelar">
 						<input type="submit" class="btn btn-success" value="Guardar datos">
 					</div>
 				</form>

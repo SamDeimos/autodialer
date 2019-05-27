@@ -44,8 +44,9 @@
 	    <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/jquery-3.4.1.min.js"></script>
     <script src="js/popper.min.js"></script>
+    <script src="js/docs.min.js"></script>
     <script src="js/script_index.js"></script>
     <script src="theme/bootstrap/js/bootstrap.min.js"></script>
 </body>

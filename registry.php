@@ -99,33 +99,33 @@
 											<td class="text-center"><?php echo $row['duration'];?></td>
 										</tr>
 										<?php }?>
-										<tr>
-											<td colspan='8'> 
-												<?php 
-													$inicios=$offset+1;
-													$finales+=$inicios -1;
-													echo "<strong>Mostrando $inicios al $finales de $numrows registros</strong>";
-												?>
-												<ul class="pagination   pull-right">
-													<?php if($_GET['pagina'] == 1): ?>
-														<li class='page-item disabled'><a>&lsaquo; Anterior</a></li>
-													<?php else: ?>
-														<li class='page-item'><a href="registry.php?camp=<?php echo $camp;?>&pagina=<?php echo $_GET['pagina']-1;?>">&lsaquo; Anterior</a></li>
-													<?php endif ?>
-
-													<?php for($i=$primera;$i<=($ultima);$i++): ?>
+								</tbody>
+								<tfoot>
+									<tr>
+										<th colspan='8'> 
+											<?php 
+												$inicios=$offset+1;
+												$finales+=$inicios -1;
+												echo "<strong>Mostrando $inicios al $finales de $numrows registros</strong>";
+											?>
+											<ul class="pagination   pull-right">
+												<?php if($_GET['pagina'] == 1): ?>
+													<li class='page-item disabled'><a>&lsaquo; Anterior</a></li>
+												<?php else: ?>
+													<li class='page-item'><a href="registry.php?camp=<?php echo $camp;?>&pagina=<?php echo $_GET['pagina']-1;?>">&lsaquo; Anterior</a></li>
+												<?php endif ?>
+												<?php for($i=$primera;$i<=($ultima);$i++): ?>
 													<li class='page-item <?php echo $_GET['pagina']==$i ? 'active' : "" ?>'><a href="registry.php?camp=<?php echo $camp;?>&pagina=<?php echo $i;?>"><?php echo $i ?></a></li>
-													<?php endfor ?>
-
-													<?php if($_GET['pagina'] == $total_pages): ?>
-														<li class='page-item disabled'><a>Siguiente &rsaquo;</a></li>
-													<?php else: ?>
-														<li class='page-item'><a href="registry.php?camp=<?php echo $camp;?>&pagina=<?php echo $_GET['pagina']+1;?>">Siguiente &rsaquo;</a></li>
-													<?php endif ?>
-												</ul>
-											</td>
-										</tr>
-								</tbody>			
+												<?php endfor ?>
+												<?php if($_GET['pagina'] == $total_pages): ?>
+													<li class='page-item disabled'><a>Siguiente &rsaquo;</a></li>
+												<?php else: ?>
+													<li class='page-item'><a href="registry.php?camp=<?php echo $camp;?>&pagina=<?php echo $_GET['pagina']+1;?>">Siguiente &rsaquo;</a></li>
+												<?php endif ?>
+											</ul>
+										</th>
+									</tr>
+								</tfoot>		
 							</table>
 						</div>
 					<?php	
@@ -143,7 +143,7 @@
 	    <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/jquery-3.4.1.min.js"></script>
     <script src="js/popper.min.js"></script>
     <script src="js/script_registry.js"></script>
     <script src="theme/bootstrap/js/bootstrap.min.js"></script>

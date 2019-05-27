@@ -11,7 +11,7 @@
 						<input type="text" name="id_camp_csv" id="id_camp_csv">
 					</div>
 					<div class="modal-footer">
-						<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">
+						<input type="button" class="btn btn-secondary" data-dismiss="modal" value="Cancelar">
 						<input type="submit" class="btn btn-success" value="Aceptar">
 					</div>
 				</form>

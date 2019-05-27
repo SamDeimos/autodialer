@@ -13,7 +13,7 @@
 						<input type="hidden" name="tabla_id" id="tabla_id">
 					</div>
 					<div class="modal-footer">
-						<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">
+						<input type="button" class="btn btn-secondary" data-dismiss="modal" value="Cancelar">
 						<input type="submit" class="btn btn-danger" value="Eliminar">
 					</div>
 				</form>
