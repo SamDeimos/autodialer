@@ -89,6 +89,27 @@ $troncales = listar_trunk();
 							</div>
 						</div>
 						<div class="row">
+							<div class="form-group col-6">
+								<label for="maxcall">Llamadas simultaneas</label>
+								<input type="text" name="maxcall" id="maxcall" class="form-control form-control-sm" value="1" required>
+							</div>
+							<div class="form-group col-6">
+								<label>Grabar llamadas</label><br>
+								<div class="form-check form-check-inline">
+									<input class="form-check-input" type="radio" value="1" name="grabar" id="grabar">
+									<label class="form-check-label" for="defaultCheck1">
+										Habilitar
+									</label>
+								</div>
+								<div class="form-check form-check-inline">
+									<input class="form-check-input" type="radio" value="0" name="grabar" id="grabar" checked>
+									<label class="form-check-label" for="defaultCheck1">
+										Deshabilitar
+									</label>
+								</div>
+							</div>
+						</div>
+						<div class="row">
 							<div class="form-group col-12">
 								<h5>Cargar .CSV</h5>
 								<div class="custom-file">

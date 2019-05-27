@@ -1,5 +1,5 @@
-﻿# Host: 192.168.100.25  (Version 5.5.56-MariaDB)
-# Date: 2019-05-25 21:45:52
+﻿# Host: 192.168.0.229  (Version 5.5.56-MariaDB)
+# Date: 2019-05-27 10:53:52
 # Generator: MySQL-Front 6.1  (Build 1.26)
 
 
@@ -21,6 +21,7 @@ CREATE TABLE `calloutcampana` (
   `trunk` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
   `callid` varchar(11) DEFAULT NULL,
   `espera` int(11) DEFAULT NULL,
+  `recording` int(11) DEFAULT NULL,
   `hinicio` varchar(10) DEFAULT NULL,
   `hfin` varchar(10) DEFAULT NULL,
   `estado` varchar(10) DEFAULT NULL,
@@ -58,8 +59,6 @@ CREATE TABLE `settings` (
   `MaxRetries` varchar(10) DEFAULT NULL,
   `RetryTime` varchar(10) DEFAULT NULL,
   `WaitTime` varchar(10) DEFAULT NULL,
-  `MaxCall` varchar(10) DEFAULT NULL,
-  `Recording` varchar(10) DEFAULT NULL,
   `Prefix` varchar(10) DEFAULT NULL,
   `Prefix_Callerid` varchar(10) DEFAULT NULL,
   PRIMARY KEY (`Id`)
@@ -69,4 +68,4 @@ CREATE TABLE `settings` (
 # Data for table "settings"
 #
 
-INSERT INTO `settings` VALUES (1,'1','60','30','1','0','','1911');
+INSERT INTO `settings` VALUES (1,'1','60','30','','1911');

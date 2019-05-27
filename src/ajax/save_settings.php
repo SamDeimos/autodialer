@@ -7,13 +7,11 @@
 		$maxretries = $_POST['maxretries'];
 		$retrytime = $_POST['retrytime'];
 		$waittime = $_POST['waittime'];
-		$maxcall = $_POST['maxcall'];
 		$Prefix = $_POST['prefix'];
 		$Prefix_Callerid = $_POST['prefix_callerid'];
-		$grabar = $_POST['grabar'][0];
 		
 		// DELETE FROM  database
-		$sqlsettings = "UPDATE settings SET MaxRetries='$maxretries', RetryTime='$retrytime', WaitTime='$waittime', MaxCall='$maxcall', Prefix='$Prefix', Prefix_Callerid='$Prefix_Callerid', Recording='$grabar' WHERE id = 1";
+		$sqlsettings = "UPDATE settings SET MaxRetries='$maxretries', RetryTime='$retrytime', WaitTime='$waittime', Prefix='$Prefix', Prefix_Callerid='$Prefix_Callerid' WHERE id = 1";
 		conecta('autodialer');
 		$query = mysql_query($sqlsettings) or die(mysql_error());
 		

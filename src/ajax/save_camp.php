@@ -12,6 +12,8 @@ if (empty($_POST['name'])){
     $camp_troncal = $_POST['camp_troncal'];
     $context = $_POST['context'];
     $time = $_POST['time'];
+	$maxcall = $_POST['maxcall'];
+	$grabar = $_POST['grabar'][0];
 
 	$createdate = date("YmdHis");
 	//File .CSV
@@ -26,13 +28,12 @@ if (empty($_POST['name'])){
 	$RetryTime = $resultsettings['RetryTime'];
 	$WaitTime = $resultsettings['WaitTime'];
 	$Priority = $resultsettings['Priority'];
-	$MaxCall = $resultsettings['MaxCall'];
 	$Prefix = $resultsettings['Prefix'];
 	$Prefix_Callerid = $resultsettings['Prefix_Callerid'];
 
 	/******************** CREACION DE CAMPAÑA ********************/
 	conecta('autodialer');
-	$sqlcamp = "INSERT INTO calloutcampana(nombre,tipo,context,fechacreacion,extension,prefijo,maxcall,trunk,callid,espera,hinicio,hfin,estado) value('".$name_camp."','Autodialer','".$context."','".$createdate."','".$type_camp."','".$Prefix."','".$MaxCall."','".$trunk."','".$Prefix_Callerid."','".$time."','".$camp_h_ini."','".$camp_h_fin."','cargada')";
+	$sqlcamp = "INSERT INTO calloutcampana(nombre,tipo,context,fechacreacion,extension,prefijo,maxcall,trunk,callid,espera,recording,hinicio,hfin,estado) value('".$name_camp."','Autodialer','".$context."','".$createdate."','".$type_camp."','".$Prefix."','".$maxcall."','".$trunk."','".$Prefix_Callerid."','".$time."','".$grabar."','".$camp_h_ini."','".$camp_h_fin."','cargada')";
 	$query = mysql_query($sqlcamp) or die(mysql_error());
 
 	conecta('autodialer');

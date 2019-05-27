@@ -89,8 +89,8 @@ $( "#add_camp" ).submit(function( event ){
 	parametros.append('trunk',$('#trunk').prop('value'));
 	parametros.append('context',$('#context').prop('value'));
 	parametros.append('time',$('#time').prop('value'));
-	parametros.append('prefix',$('#prefix').prop('value'));
-	parametros.append('prefix_callerid',$('#prefix_callerid').prop('value'));
+	parametros.append('maxcall',$('#maxcall').prop('value'));
+	parametros.append('grabar',$('#grabar').prop('value'));
 	$.ajax({
 		type: "POST",
 		url: "src/ajax/save_camp.php",

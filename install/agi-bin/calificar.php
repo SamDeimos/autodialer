@@ -41,11 +41,11 @@ $agiwrapper->verbose("Calleid: $callerid");
 $agiwrapper->verbose("Exten: $exten");
 
 //Grabar llamada
-$sql_recording = 'SELECT Recording FROM settings';
+$sql_recording = 'SELECT recording, telefono FROM calloutnumeros a INNER JOIN calloutcampana b ON idcampana = a.campana WHERE a.id = '.$callerid;
 $query_recording = mysql_query($sql_recording, $link);
 $result_recording = mysql_fetch_array($query_recording);
-if($result_recording['Recording'] == 1){
-    $recordingfilename = "q-$dst-$callerid-$fecha-$uniqueid.gsm";
+if($result_recording[0] == 1){
+    $recordingfilename = "q-$exten-$result_recording[1]-$fecha-$uniqueid.gsm";
     $folder = "/var/spool/asterisk/monitor/$year/$month/$day";
     $recordingfile = $folder.'/'.$recordingfilename;
     
