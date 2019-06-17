@@ -1,4 +1,4 @@
-## Autodialer Versión 1.2 estable
+## Autodialer Versión 1.2.8 estable
 
 Sistema de llamadas **automatizadas** para asterisk.
 
@@ -18,7 +18,9 @@ Pasos para una correcta instalación de autodialer:
     - Copie el archivo *install/agi-bin/calificar.php* y peguelo en la ruta */var/lib/asterisk/agi-bin*.
 
     **NOTA:** *para que se apliquen los cambios es necesario realizar un* **reload** *o un* **amportal restart** *de asterisk.*
+
 3. Es necesario dar permismo **chown 0777** a la carpeta *files_csv* para permitir el guardado de archivos .csv.
+
 4. Debe de configurar el usuario y contraseña a la base de datos en lso siguientes archivos
     - *autodialer/conexion.php*
         // DB credentials.
