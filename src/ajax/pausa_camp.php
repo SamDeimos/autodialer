@@ -9,8 +9,7 @@
 
 	// DELETE FROM  database
 	$sqlpausa = "UPDATE calloutcampana SET estado = 'pausada' WHERE idcampana='$id'";
-    conecta('autodialer');
-	$query = mysql_query($sqlpausa);
+	$query = mysqli_query($conAutodialer, $sqlpausa);
     // if product has been added successfully
     if ($query) {
         $messages[] = "La campaña ha sido Pausada.";

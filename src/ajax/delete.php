@@ -11,9 +11,9 @@
 	// DELETE FROM  database
 	$sqlcamp = "DELETE FROM $tabla WHERE idcampana='$id'";
 	$sqlnum = "DELETE FROM calloutnumeros where campana='$id'";
-    conecta('autodialer');
-	$query = mysql_query($sqlcamp);
-	$querynum = mysql_query($sqlnum);
+    
+	$query = mysqli_query($conAutodialer, $sqlcamp);
+	$querynum = mysqli_query($conAutodialer, $sqlnum);
     // if product has been added successfully
     if ($query) {
         $messages[] = "El producto ha sido eliminado con éxito.";

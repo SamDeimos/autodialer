@@ -12,8 +12,7 @@
 		
 		// DELETE FROM  database
 		$sqlsettings = "UPDATE settings SET MaxRetries='$maxretries', RetryTime='$retrytime', WaitTime='$waittime', Prefix='$Prefix', Prefix_Callerid='$Prefix_Callerid' WHERE id = 1";
-		conecta('autodialer');
-		$query = mysql_query($sqlsettings) or die(mysql_error());
+		$query = mysqli_query($conAutodialer, $sqlsettings);
 		
 		// if product has been added successfully
 		if ($query) {

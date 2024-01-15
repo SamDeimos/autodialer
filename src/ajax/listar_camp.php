@@ -7,7 +7,7 @@
 //$action = (isset($_REQUEST['action'])&& $_REQUEST['action'] !=NULL)?$_REQUEST['action']:'';
 $action = 'ajax';
 if($action == 'ajax'){
-	$query = mysqli_real_escape_string($con,(strip_tags($_REQUEST['query'], ENT_QUOTES)));
+	$query = mysqli_real_escape_string($conAutodialer,(strip_tags($_REQUEST['query'], ENT_QUOTES)));
 
 	$tables= "calloutcampana";
 	$campos="*";
@@ -22,12 +22,12 @@ if($action == 'ajax'){
 	$adjacents  = 4; //gap between pages after number of adjacents
 	$offset = ($page - 1) * $per_page;
 	//Count the total number of row in your table*/
-	$count_query   = mysqli_query($con,"SELECT count(*) AS numrows FROM $tables");
+	$count_query   = mysqli_query($conAutodialer,"SELECT count(*) AS numrows FROM $tables");
 	if ($row= mysqli_fetch_array($count_query)){$numrows = $row['numrows'];}
-	else {echo mysqli_error($con);}
+	else {echo mysqli_error($conAutodialer);}
 	$total_pages = ceil($numrows/$per_page);
 	//main query to fetch the data
-	$query = mysqli_query($con,"SELECT $campos FROM  $tables order by idcampana DESC LIMIT $offset,$per_page");
+	$query = mysqli_query($conAutodialer,"SELECT $campos FROM  $tables order by idcampana DESC LIMIT $offset,$per_page");
 	//loop through fetched data
 	
 

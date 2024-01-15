@@ -30,10 +30,9 @@ require_once ('conexion.php');
 			<div id="resultados"></div><!-- Carga de datos ajax aqui -->
 			<div class='outer_div'>
             <?php
-            conecta('autodialer');
             $sqlsettings = "SELECT * FROM settings";
-            $querysettings = mysql_query($sqlsettings);
-            $resultsettings = mysql_fetch_array($querysettings);
+            $querysettings = mysqli_query($conAutodialer, $sqlsettings);
+            $resultsettings = mysqli_fetch_array($querysettings);
             ?>
             <br>
 				<form name="save_settings" id="save_settings">
