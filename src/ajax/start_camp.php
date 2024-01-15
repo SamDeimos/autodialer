@@ -89,24 +89,25 @@ while ($array = mysqli_fetch_array($result_llamar)) {
     $app = 'Application: Dial';
     $app_data = 'Data: '.$troncal.$exten.'@'.$Contexto;
     $hora = date('H:i');
-    if ($hora > $hinicio and $hora < $hfin) {
+    if ($hora > $hinicio && $hora < $hfin) {
         $upd_sql = "UPDATE calloutnumeros set respuesta = 'Cola' where id = '$id'";
         $upd_query = mysqli_query($conAutodialer, $upd_sql);
 
         $filedest = '/var/spool/asterisk/outgoing/llamada-'.$id.'.call';
 
-        fopen($filedest, 'w');
-        $content = $Channel."\n";
-        $content .= $Callerid."\n";
-        $content .= $MaxRetries."\n";
-        $content .= $WaitTime."\n";
-        $content .= $account."\n";
-        $content .= $RetryTime."\n";
-        $content .= $app."\n";
-        $content .= $app_data."\n";
-        $content .= 'Set: CALLERID(num)='.$id."\n";
-        // $content .= "Archive: yes \n";
-        file_put_contents($filedest, $content, FILE_TEXT | LOCK_EX);
+        $fp = fopen($filedest, 'a');
+        fwrite($fp,
+            $Channel.PHP_EOL.
+            $Callerid.PHP_EOL.
+            $MaxRetries.PHP_EOL.
+            $WaitTime.PHP_EOL.
+            $account.PHP_EOL.
+            $RetryTime.PHP_EOL.
+            $app.PHP_EOL.
+            $app_data.PHP_EOL.
+            'Set: CALLERID(num)='.$id.PHP_EOL);
+            // 'Archive: Yes'.PHP_EOL
+        fclose($fp);
 
         $cont = $cont + 1;
         if ($call < $maxcall) {
