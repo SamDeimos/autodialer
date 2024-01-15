@@ -4,7 +4,7 @@ if (empty($_POST['name'])) {
 } elseif (!empty($_POST['name'])) {
     require_once '../../conexion.php'; // Contiene funcion que conecta a la base de datos
     
-	$dir = $_SERVER['DOCUMENT_ROOT'] . '/' . 'files_csv/';
+	$dir = $_SERVER['DOCUMENT_ROOT'] . '/' . 'autodialer/files_csv/';
     $name_camp = $_POST['name'];
     $camp_h_ini = $_POST['camp_h_ini'];
     $camp_h_fin = $_POST['camp_h_fin'];
@@ -48,6 +48,7 @@ if (empty($_POST['name'])) {
 
     // Debugs
     echo "<script>console.log( 'Debug Name Campaña: ".$name_camp."' );</script>";
+    echo "<script>console.log( 'Debug Type File: ".$file_type."' );</script>";
     echo "<script>console.log( 'Debug ID Campaña: ".$camp_id."' );</script>";
     echo "<script>console.log( 'Debug NewFileName: ".$new_file_name."' );</script>";
     echo "<script>console.log( 'Debug Hora Inicio: ".$camp_h_ini."' );</script>";
