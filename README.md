@@ -23,8 +23,8 @@ Pasos para una correcta instalación de autodialer:
 
 4. Debe de configurar el usuario y contraseña a la base de datos en lso siguientes archivos
     - *autodialer/conexion.php*
+        ```php
         // DB credentials.
-        ```
 	    define('DB_NAME','autodialer');
         define('DB_HOST','localhost');
 	    define('DB_USER','root');
@@ -36,18 +36,21 @@ Pasos para una correcta instalación de autodialer:
 	    define('DB_PASS_ASTERISK','password');
         ```
     - *extension_custom.conf*
-        exten => 4010,3,Mysql(connect conexion localhost root password autodialer)
+        ```
+        exten => 4010,3,Mysql(connect conexion localhost root password autodialer)```
     - */var/lib/asterisk/agi-bin/calificar.php*
+        ```php
         //Conexion BD poll
         $dbase='autodialer';
         $servidor='localhost';
         $usuario='root';
         $pass='password';
+        ```
 5. para comprobar que la instalación se ha realizado correctamente debe de acceder a *MI_IP/autodialer* y debe poder ver el panel de administración.
 
 ---
 
-#Derechos reservados
+# Derechos reservados
 **xudo.dev**
 Santiago Gutierrez G.
 zam.2014.sg@gmail.com
