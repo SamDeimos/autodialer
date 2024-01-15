@@ -49,7 +49,7 @@ $query = mysqli_query($conAutodialer, "SELECT $campos FROM $tables $sWhere limit
 	<link rel="stylesheet" href="theme/css/custom.css">
 </head>
 
-<body>
+<body class="d-flex flex-column justify-content-between vh-100">
 	<div class="container">
 		<div class="table-wrapper">
 			<div class="table-title">
@@ -164,6 +164,11 @@ echo "<strong>Mostrando $inicios al $finales de $numrows registros</strong>";
 	</div>
 	<!-- export Campaña Modal HTML -->
 	<?php include 'src/modal/modal_export.php'; ?>
+
+	<div class="d-flex justify-content-between py-1 px-4">
+		<span class="text-secondary">v1.0.0</span>
+		<a href="https://xudo.dev" target="_blank" class="text-secondary">© 2024 - XUDO</a>
+	</div>
 
 	<!-- Bootstrap core JavaScript
     ================================================== -->
