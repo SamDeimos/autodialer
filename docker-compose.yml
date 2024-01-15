@@ -1,0 +1,28 @@
+version: "3.1"
+services:
+  autodialer:
+    build:
+      dockerfile: Dockerfile
+    ports: 
+      - 8080:80
+    volumes:
+      - ./:/var/www/html
+    networks:
+      - autodialer
+  mariadb:
+    image: mariadb
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: autodialer
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    volumes:
+      - ./docker/data:/var/lib/mysql
+      - ./docker/dev:/docker-entrypoint-initdb.d
+    ports:
+      - "3306:3306"
+    networks:
+      - autodialer
+networks:
+  autodialer:
+    driver: bridge
