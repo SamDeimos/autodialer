@@ -37,7 +37,8 @@ Pasos para una correcta instalación de autodialer:
         ```
     - *extension_custom.conf*
         ```
-        exten => 4010,3,Mysql(connect conexion localhost root password autodialer)```
+        exten => 4010,3,Mysql(connect conexion localhost root password autodialer)
+        ```
     - */var/lib/asterisk/agi-bin/calificar.php*
         ```php
         //Conexion BD poll
