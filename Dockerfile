@@ -1,6 +1,6 @@
 FROM php:5.4.45-apache
 
-RUN docker-php-ext-install pdo pdo_mysql mysqli
+RUN docker-php-ext-install pdo pdo_mysql mysqli mysql
 
 COPY . /var/www/html
 
